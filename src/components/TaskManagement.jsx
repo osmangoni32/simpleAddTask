@@ -22,14 +22,30 @@ export default function TaskManagement() {
         done: false,
       },
     ]);
-   
   };
- 
+  const handleChangeTask = (task) => {
+    const nextTasks = tasks.map((t) => {
+      if (t.id === task.id) {
+        return task;
+      } else {
+        return t;
+      }
+    });
+    return setTasks(nextTasks);
+  };
+
+  const handleDeleteTask = (id) => {
+    setTasks(tasks.filter((task) => task.id !== id));
+  };
 
   return (
     <>
       <AddTask onAddTask={handleAddTask} />
-      <TaskList tasks={tasks} onDeleteTask={handleDeleteTask} onChangeTask={handleChangeTask} />
+      <TaskList
+        tasks={tasks}
+        onDeleteTask={handleDeleteTask}
+        onChangeTask={handleChangeTask}
+      />
     </>
   );
 }
